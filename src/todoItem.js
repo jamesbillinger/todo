@@ -16,41 +16,41 @@ export default class Todos extends Component {
     }
   }
 
-  textChange = (e) => {
+  textChange(e) {
     this.setState({
       text: e.target.value
     });
-  };
+  }
 
-  textBlur = (e) => {
+  textBlur(e) {
     const { t } = this.props;
     this.db.update({
       [t._id]: Object.assign(t, {
         text: e.target.value
       })
     });
-  };
+  }
 
-  deleteTodo = () => {
+  deleteTodo() {
     const { t } = this.props;
     this.db.child(t._id).remove();
-  };
+  }
 
-  toggleComplete = () => {
+  toggleComplete() {
     const { t } = this.props;
     this.db.update({
       [t._id]: Object.assign(t, {
         complete: !t.complete
       })
     });
-  };
+  }
 
   render() {
     const { t, ti } = this.props;
     const { text } = this.state;
     return (
       <div style={{ display: 'flex', alignItems: 'center', marginBottom: '5px' }}>
-        <div style={{color:'#bbb'}}>{ti + 1}</div>
+        <div style={{ color: '#bbb' }}>{ti + 1}</div>
         <div>
           <div
             style={{
@@ -59,12 +59,12 @@ export default class Todos extends Component {
               fontSize: '16px',
               margin: '0 5px'
             }}
-            onClick={this.deleteTodo}>
+            onClick={::this.deleteTodo}>
             X
           </div>
         </div>
         <div>
-          <input value={text || ''} onChange={this.textChange} onBlur={this.textBlur} />
+          <input value={text || ''} onChange={::this.textChange} onBlur={::this.textBlur} />
         </div>
         <div
           style={{
@@ -73,7 +73,7 @@ export default class Todos extends Component {
             color: 'blue',
             cursor: 'pointer'
           }}
-          onClick={this.toggleComplete}>
+          onClick={::this.toggleComplete}>
           ✓
         </div>
       </div>
